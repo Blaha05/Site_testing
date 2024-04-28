@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='css/new_main.css') }}">
+    <style>
+        .cont_test{
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -10px;
+        }
+        
+        .cont_item{
+            width: calc(50% - 20px);
+            height: auto;
+            background-color: white;
+            margin: 10px;
+            border-radius: 12px;
+            padding: 15px;
+            transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+            box-shadow: rgba(0, 0, 0, 0.1) 0rem 0.25rem 0.375rem -0.0625rem, rgba(0, 0, 0, 0.06) 0rem 0.125rem 0.25rem -0.0625rem;
+        }
+
+        .cont_item:hover{
+            box-shadow: rgba(0, 0, 0, 0.2) 0rem 0.25rem 0.375rem -0.0625rem, rgba(0, 0, 0, 0.06) 0rem 0.125rem 0.25rem -0.0625rem;
+        }
+        
+        .title{
+            font-size: 16px;
+        }
+        
+        .description{
+            font-size: 12px;
+            color: #a4a4a4;
+        }
+        
+        .data{
+            font-size: 12px;
+            margin: 20px 0;
+            color: #a4a4a4;
+        }
+        .head_text{
+            margin: 5px;
+            font-weight: 700;
+        }
+        .clon_head{
+            height: 70px;
+        }
+        .no_avtorized{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: calc(100vh - 90px);
+            color: #6e6e6e;
+            font-size: 14px;
+        }
+        .head{
+            width:calc(100% - 360px);
+        }
+    </style>
+</head>
+<body>
+    <div class="cont">
+        <header class="header">
+            
+            <div class="cont_logo">
+                <div class="logo">
+                    <img src="https://www.uzhnu.edu.ua/uploads/root/logos/_small_transp.png" alt="" class="foto_logo">
+                </div>
+
+                <p class="name">УжНУ</p>
+
+            </div>
+
+            
+            <div class="links">
+                <div id="activeTest" class="link_header">
+                    <?xml version="1.0"?><svg fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 30 30" width="30px" height="30px">    <path d="M 15 2 A 1 1 0 0 0 14.300781 2.2851562 L 3.3925781 11.207031 A 1 1 0 0 0 3.3554688 11.236328 L 3.3183594 11.267578 L 3.3183594 11.269531 A 1 1 0 0 0 3 12 A 1 1 0 0 0 4 13 L 5 13 L 5 24 C 5 25.105 5.895 26 7 26 L 23 26 C 24.105 26 25 25.105 25 24 L 25 13 L 26 13 A 1 1 0 0 0 27 12 A 1 1 0 0 0 26.681641 11.267578 L 26.666016 11.255859 A 1 1 0 0 0 26.597656 11.199219 L 25 9.8925781 L 25 6 C 25 5.448 24.552 5 24 5 L 23 5 C 22.448 5 22 5.448 22 6 L 22 7.4394531 L 15.677734 2.2675781 A 1 1 0 0 0 15 2 z M 18 15 L 22 15 L 22 23 L 18 23 L 18 15 z"/></svg>
+                    <p>Головна</p>
+                </div>
+                <div id="MyTest"  class="link_header">
+                    <img width="30" height="30" src="https://img.icons8.com/ios-filled/50/FFFFFF/test-passed.png" alt="test-passed"/>
+                    <p>Мої тести</p>
+                </div>
+                <div id="resultTest" class="link_header">
+                    <img width="30" height="30" src="https://img.icons8.com/material-sharp/24/FFFFFF/check-document.png" alt="check-document"/>
+                    <p>Результати</p>
+                </div>
+                <a href="{{ url_for('create')}}" class="link_header">
+                    <svg fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 48 48" width="30px" height="30px"><path d="M24,4C12.972,4,4,12.972,4,24s8.972,20,20,20s20-8.972,20-20S35.028,4,24,4z M32.5,25.5h-7v7c0,0.829-0.671,1.5-1.5,1.5	s-1.5-0.671-1.5-1.5v-7h-7c-0.829,0-1.5-0.671-1.5-1.5s0.671-1.5,1.5-1.5h7v-7c0-0.829,0.671-1.5,1.5-1.5s1.5,0.671,1.5,1.5v7h7	c0.829,0,1.5,0.671,1.5,1.5S33.329,25.5,32.5,25.5z"/></svg>
+                    <p>Створити</p>
+                </a>
+                <a href="" class="link_header">
+                    <img width="30" height="30" src="https://img.icons8.com/fluency-systems-filled/48/FFFFFF/guest-male.png" alt="guest-male"/>
+                    <p>Профіль</p>
+                </a>
+                <a href="{{ url_for('login')}}" class="link_header">
+                    <img width="30" height="30" src="https://img.icons8.com/sf-black/64/FFFFFF/enter-2.png" alt="enter-2"/>
+                    <p>Війти</p>
+                </a>
+                <a href="{{ url_for('register_get')}}" class="link_header">
+                    <img width="30" height="30" src="https://img.icons8.com/external-smashingstocks-glyph-smashing-stocks/66/FFFFFF/external-list-web-smashingstocks-glyph-smashing-stocks-2.png" alt="external-list-web-smashingstocks-glyph-smashing-stocks-2"/>                    
+                    <p>Зареєструватися</p>
+                </a>
+            </div>
+
+        </header>
+
+        <main>
+            <div class="head">
+                <svg class="block" fill="#1A1A1A" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 50 50" width="30px" height="30px"><path d="M 0 7.5 L 0 12.5 L 50 12.5 L 50 7.5 Z M 0 22.5 L 0 27.5 L 50 27.5 L 50 22.5 Z M 0 37.5 L 0 42.5 L 50 42.5 L 50 37.5 Z"/></svg>
+            </div>
+
+            <div class="clon_head"></div>
+
+            {% if active_test %}
+
+                <div id="activeTestId" class="head_text">Активні тести</div>
+
+                <div class="cont_test">
+                    {% for test in active_test %}
+                        <a href="{{ url_for('testing_get', test_id=test.id)}}" class="cont_item">
+                            <p class="title">{{ test.title }}</p>
+                            <p class="data">{{ test.faculty }}, {{ test.course }}</p>
+                            <p class="description">{{ test.description }}</p>
+                        </a>  
+                    {% endfor %}  
+                </div>
+
+            {% endif %}
+
+
+            {% if my_test %}
+
+                <div class="head_text" id="MyTestId">Ваші тести</div>
+
+                <div class="cont_test">
+                    {% for test in my_test %}
+                        <a href="{{ url_for('add_question', test_id=test.id)}}" class="cont_item">
+                            <p class="title">{{ test.title }}</p>
+                            <p class="data">{{ test.faculty }}, {{ test.course }}</p>
+                            <p class="description">{{ test.description }}</p>
+                        </a>  
+                    {% endfor %}  
+                </div>
+
+            {% endif %}
+
+
+            {% if result_test %}
+
+                <div id="resultTestId" class="head_text">Результати тестів</div>
+
+                <div class="cont_test">
+                    {% for test in result_test %}
+                        <a href="{{ url_for('testing_get', test_id=test.test_id)}}" class="cont_item">
+                            <p class="title">{{ test.title }}</p>
+                            <p class="data">{{ test.faculty }}, {{ test.course }}</p>
+                            <p class="description">{{ test.description }}</p>
+                        </a>  
+                    {% endfor %}  
+                </div>
+
+            {% endif %}
+
+            {% if not active_test and not my_test and not result_test %}
+                <p class="no_avtorized">Ви не війшли в акаунт, або для вас нічого не має</p>
+            {% endif %}
+
+
+        </main>
+
+    </div>
+
+
+
+
+    <script>
+        let isClicked = false;
+
+    document.querySelector('.block').addEventListener('click', function() {
+    if (!isClicked) {
+        document.querySelectorAll('.link_header p').forEach(function(element) {
+            element.style.display = 'none';
+        });
+
+        document.querySelector('.name').style.display = 'none';
+        
+        document.querySelector('header').style.width = 'auto';
+        document.querySelector('header').style.gap = '0';
+
+        document.querySelector('main').style.width = 'calc(100% - 110px - 60px)';
+        document.querySelector('.head').style.width = 'calc(calc(100% - 360px + 190px)';
+        document.querySelectorAll('.cont_item').forEach(function(element) {
+            element.style.width = 'calc(33.3333% - 20px)';
+        });
+
+        document.querySelector('.cont_logo').style.margin = '0';
+        
+        document.querySelectorAll('.link_header').forEach(function(element) {
+            element.style.display = 'flex';
+            element.style.justifyContent = 'center';
+            element.style.margin = '10px';
+
+        });
+
+        isClicked = true;
+    } else {
+        document.querySelectorAll('.link_header p').forEach(function(element) {
+            element.style.display = '';
+        });
+
+        document.querySelector('.name').style.display = '';
+        
+        document.querySelector('header').style.width = '';
+        document.querySelector('header').style.gap = '';
+
+        document.querySelector('main').style.width = '';
+        document.querySelector('.head').style.width = '';
+        document.querySelectorAll('.cont_item').forEach(function(element) {
+            element.style.width = '';
+        });
+
+        
+        document.querySelector('.cont_logo').style.margin = '';
+        
+        document.querySelectorAll('.link_header').forEach(function(element) {
+            element.style.display = '';
+            element.style.justifyContent = '';
+            element.style.margin = '';
+        });
+
+        isClicked = false;
+        }
+    });
+        
+        document.querySelector('#MyTest').addEventListener('click', function() {
+            var element = document.querySelector('#MyTestId');
+            var offset = 90;
+            var y = element.getBoundingClientRect().top + window.pageYOffset - offset;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+        });
+
+
+        document.querySelector('#resultTest').addEventListener('click', function() {
+            var element = document.querySelector('#resultTestId');
+            var offset = 90;
+            var y = element.getBoundingClientRect().top + window.pageYOffset - offset;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+        });
+
+
+        document.querySelector('#activeTest').addEventListener('click', function() {
+            var element = document.querySelector('#activeTestId');
+            var offset = 90;
+            var y = element.getBoundingClientRect().top + window.pageYOffset - offset;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>

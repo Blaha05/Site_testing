@@ -1,0 +1,156 @@
+body {
+    margin: 0px;
+    color: rgba(0, 0, 0, 0.87);
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 1.625;
+    letter-spacing: 0.00938em;
+    background-color: rgb(240, 242, 245);
+    padding: 20px;
+}
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+}
+
+a{
+    color: black;
+    text-decoration: none;
+}
+
+.cont{
+    width: 100%;
+
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+
+
+
+header{
+    background-color: #E6E6FA;
+    padding: 20px 15px;
+    border-radius: 17px;
+    
+    position: fixed;
+
+    width: 300px;
+    height: calc(100vh - 40px);
+    background: linear-gradient(to bottom, #3d3d3d, #1a1a1a); /* Градієнт від темного сірого до близького до чорного */
+}
+
+.cont_logo{
+    padding: 15px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    margin: 0 10px 20px 0;
+}
+
+.logo{
+    width: 50px;
+    height: auto;
+}
+
+.name{
+    color: white;
+    font-size: 1.5rem;
+    letter-spacing: 2.5px;
+}
+
+.foto_logo{
+    width: 100%;
+    height: auto;
+}
+
+.links{
+    display: flex;
+    flex-direction: column; /* розмістити блоки у стовбець */
+}
+
+.link_header{
+    font-weight: 400;
+    font-size: 1.2rem;    
+    padding: 10px 15px;
+    color: white;
+    
+    transition: all .3s;
+    margin: 6px;
+
+    display: flex;
+    align-items: center;
+    gap: 25px;
+
+    cursor: pointer;
+}
+
+.link_header:hover{
+    background-color: #555555;
+    border-radius: 5px;
+}
+
+
+
+main{
+    width: calc(100% - 300px - 60px);
+    margin: 0 20px;
+
+    position: absolute;
+    right: 0;
+}
+
+
+.head{    
+    background-color: white;
+    border-radius: 17px;
+
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+
+    margin-bottom: 10px;
+    position: fixed;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+
+}
+
+.head svg{
+    cursor: pointer;
+}
+
+.cont_test{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -10px;
+}
+
+.cont_item{
+    width: calc(50% - 20px);
+    height: auto;
+    background-color: white;
+    margin: 10px;
+    border-radius: 12px;
+    padding: 15px;
+}
+
+.title{
+    font-size: 16px;
+}
+
+.description{
+    font-size: 12px;
+    color: #a4a4a4;
+}
+
+.data{
+    font-size: 12px;
+    margin: 20px 0;
+    color: #a4a4a4;
+}
+

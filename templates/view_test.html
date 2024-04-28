@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Тест</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            width: 50%;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .question-title {
+            font-weight: bold;
+        }
+        
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            margin-top: 20px;
+        }
+        
+        .question {
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+        
+        .question-title {
+            font-size: 17px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: flex;
+            gap: 20px;
+        }
+        
+        .cont_ans{
+            display: flex;
+            gap: 5px;
+        }
+
+        .answer {
+            font-size: 15px;
+            margin: 2px 0 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" data-test-id="{{ test_id }}">
+        <form method="post">
+            {% for question_index in range(questions_with_answers|length) %}
+                {% set question = questions_with_answers[question_index] %}
+                {% set status = status_answer[question_index] %}
+                <div class="question">
+                    <div class="question-title">{{ question['question'] }}</div>
+                    {% for answer_index in range(question['answers']|length) %}
+                        {% set answer = question['answers'][answer_index] %}
+                        <div class="cont_ans">
+                            <input type="checkbox" class="checkbox" id="answer{{ answer_index }}-checkbox" name="{{ answer }}" value="{{ status[answer] }}" data-status="{{ status[answer] }}">
+                            <div class="answer">{{ answer }}</div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        document.querySelector('form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Зупиняємо стандартну подію відправки форми
+            const testId = document.querySelector('.container').getAttribute('data-test-id');
+            let selectedAnswers = []; // Зберігаємо вибрані відповіді
+            let status = []; // Зберігаємо статуси відповідей
+            // Отримуємо всі вибрані відповіді та статуси
+            document.querySelectorAll('input[type=checkbox]:checked').forEach(function(checkbox) {
+                selectedAnswers.push(checkbox.value); // Додаємо вибрану відповідь у масив
+            });
+            document.querySelectorAll('input[type=checkbox]').forEach(function(checkbox) {
+                status.push(checkbox.getAttribute('data-status')); // Додаємо статус відповіді у масив
+            });
+            console.log(selectedAnswers); // Виводимо список вибраних відповідей у консоль
+            console.log(status); // Виводимо список статусів відповідей у консоль
+            const url = 'http://127.0.0.1:8000/result/'+testId
+            console.log(url);
+    
+            fetch(url , {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({selectedAnswers: selectedAnswers, status: status}), // Передаємо дані у форматі JSON
+            })
+            .then(response => response.text())
+            .then(html => {
+                document.open();
+                document.write(html);
+                document.close();
+            })
+            .catch(error => console.error('Помилка:', error));
+
+        });
+    </script>
+
+</body>
+</html>

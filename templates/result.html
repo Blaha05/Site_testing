@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Результат тесту</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            margin-top: 50px;
+        }
+        p {
+            color: #666;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Результат тесту</h1>
+    <p>Ваш результат: {{ percentage_correct }}% </p>
+    <p>Ви відповіли вірно на {{ all }} з {{ correct }}  питань.</p>
+</body>
+</html>

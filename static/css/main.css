@@ -1,0 +1,91 @@
+body {
+    font-family: Ralway, sans-serif;
+    font-size: 18px;
+    background-color: #E6E6FA;
+}
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.cont{
+    max-width: 1320px;
+    width: 100%;
+
+    margin: 0 auto;
+}
+
+
+/*==============================*/
+
+
+.header{
+    background-color: #F5F5F5;
+}
+
+.logo{
+    width: 50px;
+    height: auto;
+    margin: 12px 0 
+}
+
+.foto__header{
+    width: 100%;
+    height: auto;
+}
+
+.cont__header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.butom_register p{
+    padding: 10px 20px;
+    background-color: #8CA6B4;
+    border-radius: 7px;
+
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s;
+
+}
+
+.butom_register p:hover{
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.butom_register{
+    text-decoration: none;
+    color: black;
+}
+
+.links__header{
+    width: calc(100% - 60px);
+    display: flex;
+    gap: 40px;
+    margin-left: 40px;
+}
+
+.link__header{
+    text-decoration: none;
+    color: black;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    opacity: .75;
+}
+    
+.link__header:hover{
+    opacity: 1;
+}
+
+.login{
+    text-decoration: none;
+    color: black;
+    margin-right: 20px;
+    font-weight:bolder;
+}
+
+
+
+

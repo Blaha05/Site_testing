@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Створення питання</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .question-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .checkbox {
+            margin-right: 10px;
+        }
+
+        .answer-input {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .answer-input input[type="text"] {
+            flex: 1;
+            margin-right: 5px;
+        }
+
+        .answer-input input[type="checkbox"] {
+            margin-right: 5px;
+        }
+
+        .submit-button {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <form action="{{ url_for('add_3', test_id=test_id) }}" method="post">
+        <div class="answer-input">
+            <input type="text" placeholder="Питання" id="question" name="question">
+        </div>
+        <div class="answer-input">
+            <input type="checkbox" class="checkbox" id="answer1-checkbox" name="answer1_checkbox">
+            <input type="text" placeholder="Варіант відповіді 1" id="answer1" name="answer1">
+        </div>
+        <div class="answer-input">
+            <input type="checkbox" class="checkbox" id="answer2-checkbox" name="answer2_checkbox">
+            <input type="text" placeholder="Варіант відповіді 2" id="answer2" name="answer2">
+        </div>
+        <div class="answer-input">
+            <input type="checkbox" class="checkbox" id="answer3-checkbox" name="answer3_checkbox">
+            <input type="text" placeholder="Варіант відповіді 3" id="answer3" name="answer3">
+        </div>
+        <div class="answer-input">
+            <input type="checkbox" class="checkbox" id="answer4-checkbox" name="answer4_checkbox">
+            <input type="text" placeholder="Варіант відповіді 4" id="answer4" name="answer4">
+        </div>
+        <button class="submit-button">Створити питання</button>
+    </form>
+    
+</body>
+</html>

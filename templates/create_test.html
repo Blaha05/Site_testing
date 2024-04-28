@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create Test Page</title>
+<link rel="stylesheet" href="{{ url_for('static', path='css/create_test.css') }}">
+</head>
+<body>
+    <div id="container">
+        <h1>Створити тест</h1>
+        <form id="create-test-form" action="{{ url_for('create_test')}}" method="post">
+            <label for="test-name">Назва тесту:</label>
+            <input type="text" id="test-name" name="title">
+            
+            <label for="test-description">Опис тесту:</label>
+            <textarea id="test-description" name="description"></textarea>
+            
+            <label for="faculty">Факультет:</label>
+            <select id="faculty" name="faculty">
+                <option value="biological">Біологічний факультет</option>
+                <option value="geographical">Географічний факультет</option>
+                <option value="economic">Економічний факультет</option>
+                <option value="engineering">Інженерно-технічний факультет</option>
+                <option value="medical">Медичний факультет</option>
+                <option value="medical2">Медичний факультет №2</option>
+                <option value="dental">Стоматологічний факультет</option>
+                <option value="health">Факультет здоров'я та фізичного виховання</option>
+                <option value="foreign_philology">Факультет іноземної філології</option>
+                <option value="it">Факультет інформаційних технологій</option>
+                <option value="history_international_relations">Факультет історії та міжнародних відносин</option>
+                <option value="math_digital_technologies">Факультет математики та цифрових технологій</option>
+                <option value="international_economic_relations">Факультет міжнародних економічних відносин</option>
+                <option value="postgraduate_education_pre-university_training">Факультет післядипломної освіти та доуніверситетської підготовки</option>
+                <option value="social_sciences">Факультет суспільних наук</option>
+                <option value="tourism_international_communications">Факультет туризму та міжнародних комунікацій</option>
+                <option value="physical">Фізичний факультет</option>
+                <option value="philological">Філологічний факультет</option>
+                <option value="chemical">Хімічний факультет (Навчально-науковий інститут хімії та екології)</option>
+                <option value="law">Юридичний факультет</option>
+            </select>
+            
+            <label for="course">Курс:</label>
+            <select id="course" name="course">
+                <option value="course1">Курс 1</option>
+                <option value="course2">Курс 2</option>
+                <option value="course3">Курс 3</option>
+                <option value="course4">Курс 4</option>
+                <option value="course5">Магістр</option>
+                <option value="course6">Аспірант</option>
+            </select>
+            
+            <div class="cont_button"><button>Продовжити</button></div>
+            
+        </form>
+    </div>
+</body>
+</html>

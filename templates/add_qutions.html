@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Проста форма</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/add_question.css') }}">
+    <style>
+        .delete{
+            padding: 10px 15px;
+            border: solid 1px red;
+            border-radius: 4px;
+            font-size: 13px;
+            transition: all .3s;
+            background-color: white;
+            color: black;
+        }
+        .delete:hover{
+            background-color: red;
+            color: white;
+        }
+        .buttoms{
+            display: flex;
+            justify-content: space-between;
+        }
+        .testing{
+            padding: 10px 15px;
+            border: solid 1px #007bff;
+            border-radius: 4px;
+            font-size: 13px;
+            transition: all .3s;
+            background-color: white;
+            color: black;
+        }
+        .testing:hover{
+            background-color: #007bff;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <div class="buttoms">
+            <a href="{{ url_for('delate_test', test_id = test_id)}}" class="delete">Видалити тест</a>
+            <a href="{{ url_for('testing_get', test_id = test_id)}}" class="testing">Пройти тест</a>
+        </div>
+    </div>
+
+    
+
+    <div class="container">
+        <form action="{{ url_for('add_3', test_id=test_id) }}" method="post">
+            <div class="answer-input">
+                <input type="text" placeholder="Питання" id="question" name="question">
+            </div>
+            <div class="answer-input">
+                <input type="checkbox" class="checkbox" id="answer1-checkbox" name="answer1_checkbox">
+                <input type="text" placeholder="Варіант відповіді 1" id="answer1" name="answer1">
+            </div>
+            <div class="answer-input">
+                <input type="checkbox" class="checkbox" id="answer2-checkbox" name="answer2_checkbox">
+                <input type="text" placeholder="Варіант відповіді 2" id="answer2" name="answer2">
+            </div>
+            <div class="answer-input">
+                <input type="checkbox" class="checkbox" id="answer3-checkbox" name="answer3_checkbox">
+                <input type="text" placeholder="Варіант відповіді 3" id="answer3" name="answer3">
+            </div>
+            <div class="answer-input">
+                <input type="checkbox" class="checkbox" id="answer4-checkbox" name="answer4_checkbox">
+                <input type="text" placeholder="Варіант відповіді 4" id="answer4" name="answer4">
+            </div>
+            <div class="cont_button">
+                <button class="submit-button">Створити питання</button>
+                <a class="button" href="{{ url_for('home')}}">Завершити</a>
+            </div>
+            
+        </form>
+
+        <div class="container">
+            {% for question in questions_with_answers %}
+                <div class="question">
+                    <div class="question-title">{{ question['question'] }}</div>
+                    {% for answer in question['answers'] %}
+                        <div class="answer">{{ answer }}</div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</body>
+</html>
+
+https://demos.creative-tim.com/material-dashboard-react/#/dashboard
