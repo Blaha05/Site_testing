@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Account</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .user-details {
+            border-top: 1px solid #ccc;
+            padding-top: 20px;
+        }
+        .user-details p {
+            margin: 10px 0;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>User Account Details</h1>
+        <div class="user-details">
+            <p><strong>Id:</strong> {{user.id}} </p>
+            <p><strong>Name:</strong> {{user.ful_mame}} </p>
+            <p><strong>Faculty:</strong> {{user.faculty}}</p>
+            <p><strong>Course:</strong> {{user.course}}</p>
+            <p><strong>Email:</strong> {{user.email}}</p>
+        </div>
+        <form action="http://127.0.0.1:8000/giveassec?user_id={{user.id}}" method="post">
+            {% if user.is_superuser %}
+                <button class="submit-button">Забрати права</button>
+            {% else %}
+                <button class="submit-button">Надати права</button>
+            {% endif %}
+
+        </form>
+        
+    </div>
+</body>
+</html>

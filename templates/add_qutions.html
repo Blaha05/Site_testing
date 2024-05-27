@@ -35,6 +35,13 @@
             background-color: #007bff;
             color: white;
         }
+        .head_result{
+            font-size: 18px;
+            margin-top: 18px;
+        }
+        p{
+            margin: 0;
+        }
     </style>
 </head>
 <body>
@@ -84,11 +91,23 @@
                         <div class="answer">{{ answer }}</div>
                     {% endfor %}
                 </div>
+                <a href="{{ url_for('delate_question',test = test_id, test_id = question['question'])}}">Видалити</a>
             {% endfor %}
         </div>
 
+        <p class="head_result" >Результати:</p>
+            {% for result in results %}
+                <div style="margin: 0;display:flex;justify-content: space-between;align-items: center;" class="container">
+                    <p>{{result.user_id}}</p> 
+                    <p>Блага Віктор Вікторович</p>
+                    <p>{{result.point}}/{{result.count_point}}</p> 
+                    <p>резудьтат: {{ (result.point / result.count_point) * 100 }}%</p>
+                </div>
+            {% endfor %}    
     </div>
 </body>
 </html>
 
+<!-- Це коментар в HTML 
 https://demos.creative-tim.com/material-dashboard-react/#/dashboard
+-->

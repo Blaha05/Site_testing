@@ -58,6 +58,20 @@
         }
         .head{
             width:calc(100% - 360px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .find{
+            width: 135px;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            border: none;
+            outline: none;
+            background: transparent;
+            border-bottom: 1px solid #000000;
         }
     </style>
 </head>
@@ -92,7 +106,7 @@
                     <svg fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 48 48" width="30px" height="30px"><path d="M24,4C12.972,4,4,12.972,4,24s8.972,20,20,20s20-8.972,20-20S35.028,4,24,4z M32.5,25.5h-7v7c0,0.829-0.671,1.5-1.5,1.5	s-1.5-0.671-1.5-1.5v-7h-7c-0.829,0-1.5-0.671-1.5-1.5s0.671-1.5,1.5-1.5h7v-7c0-0.829,0.671-1.5,1.5-1.5s1.5,0.671,1.5,1.5v7h7	c0.829,0,1.5,0.671,1.5,1.5S33.329,25.5,32.5,25.5z"/></svg>
                     <p>Створити</p>
                 </a>
-                <a href="" class="link_header">
+                <a href="{{ url_for('account')}}" class="link_header">
                     <img width="30" height="30" src="https://img.icons8.com/fluency-systems-filled/48/FFFFFF/guest-male.png" alt="guest-male"/>
                     <p>Профіль</p>
                 </a>
@@ -111,6 +125,9 @@
         <main>
             <div class="head">
                 <svg class="block" fill="#1A1A1A" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 50 50" width="30px" height="30px"><path d="M 0 7.5 L 0 12.5 L 50 12.5 L 50 7.5 Z M 0 22.5 L 0 27.5 L 50 27.5 L 50 22.5 Z M 0 37.5 L 0 42.5 L 50 42.5 L 50 37.5 Z"/></svg>
+                <form action="{{ url_for('other_account')}}" method="get">
+                    <input class="find" type="text" placeholder="Знайти користувача" id="user_id" name="user_id">
+                </form>
             </div>
 
             <div class="clon_head"></div>
@@ -157,11 +174,11 @@
                     {% for test in result_test %}
                         <a href="{{ url_for('testing_get', test_id=test.test_id)}}" class="cont_item">
                             <p class="title">{{ test.title }}</p>
-                            <p class="data">{{ test.faculty }}, {{ test.course }}</p>
-                            <p class="description">{{ test.description }}</p>
+                            <p class="data">Ваш резудьтат: {{ (test.point / test.count_point) * 100 }}%</p>
+                            <p class="description">Кількість правельних вітповідей: {{ test.point }} / {{ test.count_point }}</p>
                         </a>  
                     {% endfor %}  
-                </div>
+                </div
 
             {% endif %}
 

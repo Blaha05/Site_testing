@@ -1,4 +1,4 @@
-from typing import Type
+from typing import Optional, Type
 
 from fastapi import APIRouter, Depends, Form, HTTPException, Request, status
 
@@ -10,9 +10,18 @@ from fastapi_users.manager import BaseUserManager, UserManagerDependency
 from fastapi_users.router.common import ErrorCode, ErrorModel
 from pydantic import EmailStr
 
+import fastapi_users
+from auth.cokie import auth_backend
+from auth.menger import get_user_manager
+from auth.models import User
+from databases import get_async_session
+from sqlalchemy.ext.asyncio import AsyncSession
+
 from auth.schems import UserCreate
 
 from starlette.status import HTTP_303_SEE_OTHER
+
+from sqlalchemy import select
 
 router = APIRouter()
 
@@ -121,3 +130,41 @@ def get_register_router(
         return schemas.model_validate(user_schema, created_user)
 
     return router
+
+
+fastapi_users = fastapi_users.FastAPIUsers[User, int](
+    get_user_manager,
+    [auth_backend],
+)
+
+current_user = fastapi_users.current_user()
+
+templates = Jinja2Templates(directory='templates')
+
+
+@router.get('/account', name='account')
+async def get_page_account(request: Request, user: Optional[User] = Depends(current_user), session: AsyncSession = Depends(get_async_session)):
+    return templates.TemplateResponse('account.html', {'request': request,
+                                                    'user':user})
+
+
+@router.get('/findaccount', name='other_account')
+async def get_page_other_account(request: Request, user_id:int, session: AsyncSession = Depends(get_async_session)):
+    user = await session.execute(select(User).filter(User.id == user_id))
+    user = user.scalars().all()[0]
+    
+    return templates.TemplateResponse('account.html', {'request': request,
+                                                    'user':user})
+
+
+@router.post('/giveassec', name='giveassec')
+async def giveassec(user_id:int, session: AsyncSession = Depends(get_async_session)):
+    user = await session.get(User, user_id)
+    if user.is_superuser:
+        user.is_superuser = False
+    else:
+        user.is_superuser = True
+    await session.commit()
+
+    url = f'http://127.0.0.1:8000/findaccount?user_id={user_id}'
+    return RedirectResponse(url=url, status_code=HTTP_303_SEE_OTHER)    

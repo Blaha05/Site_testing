@@ -12,6 +12,8 @@ from result.model import Result
 from starlette.status import HTTP_303_SEE_OTHER
 import g4f
 
+from testing.models import Test
+
 router = APIRouter()
 
 templates = Jinja2Templates(directory='templates')
@@ -35,7 +37,7 @@ async def get_result(request: Request):
 
 
 @router.post('/result/{test_id}')
-async def calculation_point(request: Request, test_id, user = Depends(current_user), session: AsyncSession = Depends(get_async_session)):
+async def calculation_point(request: Request, test_id:int, user = Depends(current_user), session: AsyncSession = Depends(get_async_session)):
     data = await request.json()
 
     choose_answer = data['selectedAnswers']
@@ -50,7 +52,10 @@ async def calculation_point(request: Request, test_id, user = Depends(current_us
         if i == 'on':
             point_all += 1
     
-    q = Result(user_id = user.id, test_id = int(test_id), point = point_choose)
+    test = await session.execute(select(Test).filter(Test.id == test_id))
+    test_title = test.scalars().all()[0].title
+
+    q = Result(user_id = user.id, test_id = int(test_id), point = point_choose, count_point=point_all, title=test_title)
     
     session.add(q)
     await session.commit()

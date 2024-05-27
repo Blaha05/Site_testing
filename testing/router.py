@@ -12,6 +12,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from auth.cokie import auth_backend
 from starlette.status import HTTP_303_SEE_OTHER
 from testing.shems import Question2
+from result.model import Result
 
 templates = Jinja2Templates(directory='templates')
 
@@ -69,6 +70,10 @@ async def get_test(request: Request, test_id: int, session: AsyncSession = Depen
     
     questions = await session.execute(select(Question).filter(Question.test_id == test_id))
     questions = questions.scalars().all()
+    questions.reverse()
+
+    results = await session.execute(select(Result).filter(Result.test_id == test_id))
+    results = results.scalars().all()
 
     questions_with_answers = []
     for question in questions:
@@ -78,7 +83,8 @@ async def get_test(request: Request, test_id: int, session: AsyncSession = Depen
 
     return templates.TemplateResponse('add_qutions.html', {'request': request, 
                                                            'test_id': test_id, 
-                                                           "questions_with_answers": questions_with_answers
+                                                           "questions_with_answers": questions_with_answers,
+                                                           "results": results
                                                            })
     
 
@@ -135,5 +141,11 @@ async def delete_test(test_id, session: AsyncSession = Depends(get_async_session
     return RedirectResponse(url=url, status_code=HTTP_303_SEE_OTHER)
 
    
+@router.get("/deletequestion/{test}/{test_id}", name='delate_question')
+async def delete_question(request: Request, test, test_id:str, session: AsyncSession = Depends(get_async_session)):
+    q = await session.execute(delete(Question).filter(Question.text == test_id))
+    await session.commit()
 
+    url = router.url_path_for('add_question', test_id=int(test))
+    return RedirectResponse(url=url, status_code=HTTP_303_SEE_OTHER)
 
